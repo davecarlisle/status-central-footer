@@ -2,15 +2,27 @@
 import React, { useContext } from 'react';
 import { Box, Footer, ResponsiveContext, Text, Anchor } from 'grommet';
 
+function goNav(url) {
+  window.parent.location.href = url;
+}
+
 const AppFooter = () => {
   const size = useContext(ResponsiveContext);
   const year = new Date().getFullYear();
 
   const footerLinks = [
-    { label: 'Privacy', url: 'https://www.hpe.com/us/en/legal/privacy.html' },
-    { label: 'Terms of Use', url: 'https://www.hpe.com/us/en/about/legal/terms-of-use.html' },
-    { label: 'Ad Choices & Cookies', url: 'https://www.hpe.com/us/en/legal/privacy.html#datacollection' },
-    { label: 'Do Not Sell or Share My Personal Information', url: 'https://www.hpe.com/us/en/privacy/personal-information.html' },
+    { label: 'Privacy', 
+      onClick: () => { goNav('https://www.hpe.com/us/en/legal/privacy.html') } 
+    },
+    { label: 'Terms of Use', 
+      onClick: () => { goNav('https://www.hpe.com/us/en/about/legal/terms-of-use.html') } 
+    },
+    { label: 'Ad Choices & Cookies', 
+      onClick: () => { goNav('https://www.hpe.com/us/en/legal/privacy.html#datacollection') } 
+    },
+    { label: 'Do Not Sell or Share My Personal Information',
+      onClick: () => { goNav('https://www.hpe.com/us/en/privacy/personal-information.html') } 
+    },
   ];
   return (
     <Footer
@@ -42,8 +54,7 @@ const AppFooter = () => {
         {footerLinks.map(link => (
           <Anchor size="small" weight="light" color="#757575" 
               label={link.label}
-              href={link.url} 
-              onClick={(href) => { window.parent.location.href = href }} />
+              onClick={link.onClick} />
         ))}
       </Box>
     </Footer>
